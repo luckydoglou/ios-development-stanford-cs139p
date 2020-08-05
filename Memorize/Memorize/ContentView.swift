@@ -2,13 +2,13 @@
 //  ContentView.swift
 //  Memorize
 //
-//  Created by XIAOLOU HUANG on 7/31/20.
+//  Created by Lor Worwag  on 7/31/20.
 //  Copyright © 2020 Lor Worwag. All rights reserved.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct EmojiMemoryGameView: View {
     var viewModel: EmojiMemoryGame
     
     var body: some View {
@@ -68,6 +68,6 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewModel: EmojiMemoryGame())
+        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
     }
 }
