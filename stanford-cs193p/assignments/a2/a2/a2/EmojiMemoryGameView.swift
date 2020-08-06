@@ -12,19 +12,33 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
-        Grid(viewModel.cards) { card in
-            CardView(card: card).onTapGesture {
-                self.viewModel.choose(card: card)
+        VStack{
+            Button(action: viewModel.startANewGame) {
+                Text("New Game")
             }
-            .padding(5)
+                .padding()
+            HStack {
+                Spacer()
+                Text("\(viewModel.themeName) Theme")
+                Spacer()
+                Text("Points: \(viewModel.points)")
+                Spacer()
+            }
+            Grid(viewModel.cards) { card in
+                CardView(card: card, themeColor: self.viewModel.themeColor).onTapGesture {
+                    self.viewModel.choose(card: card)
+                }
+                    .padding(5)
+            }
+                .padding(.bottom)
+            
         }
-        .padding()
-        .foregroundColor(Color.orange)
     }
 }
 
 struct CardView: View {
     var card: MemoryGame<String>.Card
+    var themeColor: LinearGradient
     
     var body: some View {
         GeometryReader { geometry in
@@ -40,7 +54,7 @@ struct CardView: View {
                 Text(card.content)
             } else {
                 if !card.isMatched {
-                    RoundedRectangle(cornerRadius: cornerRadius).fill()                    
+                    RoundedRectangle(cornerRadius: cornerRadius).fill(themeColor)
                 }
             }
         }
@@ -55,17 +69,6 @@ struct CardView: View {
         min(size.width, size.height) * 0.75
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 struct ContentView_Previews: PreviewProvider {

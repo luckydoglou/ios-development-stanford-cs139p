@@ -7,10 +7,14 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct MemoryGame<CardType> where CardType: Equatable {
     
     var cards: Array<Card>
+    var themeName: String
+    var themeColor: LinearGradient
+    var points: Int
     
     var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter { cards[$0].isFaceUp }.only }
@@ -21,13 +25,18 @@ struct MemoryGame<CardType> where CardType: Equatable {
         }
     }
     
-    init(numberOfPairsOfCards: Int, cardContent: (Int) -> CardType) {
+    init(numberOfPairsOfCards: Int, themeName: String, themeColor: LinearGradient, cardContent: (Int) -> CardType) {
         cards = Array<Card>()
+        self.themeName = themeName
+        self.themeColor = themeColor
+        points = 0
+        
         for pairIndex in 0..<numberOfPairsOfCards {
             let cardContent = cardContent(pairIndex)
             cards.append(Card(content: cardContent, id: pairIndex*2))
             cards.append(Card(content: cardContent, id: pairIndex*2+1))
         }
+        cards.shuffle()
     }
     
     mutating func choose(card: Card) {
@@ -38,6 +47,12 @@ struct MemoryGame<CardType> where CardType: Equatable {
                 if cards[chosenIndex].content == cards[potentialMatchedIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchedIndex].isMatched = true
+                    points += 2
+                } else {
+                    if cards[chosenIndex].hasSeen { points -= 1 }
+                    if cards[potentialMatchedIndex].hasSeen { points -= 1 }
+                    cards[chosenIndex].hasSeen = true
+                    cards[potentialMatchedIndex].hasSeen = true
                 }
                 cards[chosenIndex].isFaceUp = true
             } else {
@@ -51,6 +66,7 @@ struct MemoryGame<CardType> where CardType: Equatable {
         var isMatched: Bool = false
         var content: CardType
         var id: Int
+        var hasSeen: Bool = false
         
     }
     
