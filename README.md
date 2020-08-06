@@ -1,6 +1,7 @@
 # memorize-ios-stanford-cs139p
 
 Stanford CS139p - Develop Apps for iOS (Spring 2020) </br>
-[Stanford-CS193p Website](https://cs193p.sites.stanford.edu/)
+[Stanford-CS193p Website](https://cs193p.sites.stanford.edu/) </br>
 
-Memorize game in iOS </br>
+lecture 1-2: MVVM; Swift Types </br>
+lecture 3-4: RectiveUI; Protocols; layout; Grid; Enum; Optionals </br>
