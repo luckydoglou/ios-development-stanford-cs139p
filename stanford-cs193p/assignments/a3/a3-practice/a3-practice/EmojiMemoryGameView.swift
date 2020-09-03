@@ -1,8 +1,8 @@
 //
-//  EmojiMemoryGameView.swift
-//  Memorize
+//  ContentView.swift
+//  a3-practice
 //
-//  Created by Lor Worwag  on 7/31/20.
+//  Created by Lor Worwag on 8/19/20.
 //  Copyright © 2020 Lor Worwag. All rights reserved.
 //
 

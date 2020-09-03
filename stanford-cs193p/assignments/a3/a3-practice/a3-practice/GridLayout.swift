@@ -1,9 +1,9 @@
 //
 //  GridLayout.swift
-//  Memorize
+//  a3-practice
 //
-//  Created by CS193p Instructor.
-//  Copyright © 2020 Stanford University. All rights reserved.
+//  Created by Lor Worwag on 9/2/20.
+//  Copyright © 2020 Lor Worwag. All rights reserved.
 //
 
 import SwiftUI

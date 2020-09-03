@@ -1,8 +1,8 @@
 //
 //  Grid.swift
-//  Memorize
+//  a3-practice
 //
-//  Created by Lor Worwag on 8/4/20.
+//  Created by Lor Worwag on 9/2/20.
 //  Copyright © 2020 Lor Worwag. All rights reserved.
 //
 
@@ -38,4 +38,3 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
     }
     
 }
-
