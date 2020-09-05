@@ -8,29 +8,34 @@
 
 import Foundation
 
-struct SetCardGame<Content> {
-//    var cards: Array<Card>
+struct SetCardGame<CardContent> {
+    var cards: Array<Card>
     
-    init() {
-        
+    init(numberOfCards: Int, cardContentFactory: (Int) -> CardContent) {
+        cards = Array<Card>()
+        for index in 0..<numberOfCards {
+            let content = cardContentFactory(index)
+            cards.append(Card(id: index, content: content))
+        }
     }
     
     
-    func choose() {
-        
+    func choose(card: Card) {
+        print(card)
     }
     
+    func checkMatching() {
+        
+    }
     
     struct Card: Identifiable {
         
         var id: Int
+        var content: CardContent
+        var isShowing: Bool = false
         var isSelected: Bool = false
         var isMatched: Bool = false
-        var content: Content
-//        var number: int
-//        var shape: Shape
-//        var shading: Shape
-//        var color: Color
+
         
     }
     

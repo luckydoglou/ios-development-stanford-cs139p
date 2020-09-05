@@ -19,10 +19,10 @@ struct EmojiMemoryGameView: View {
                             self.viewModel.choose(card: card)
                         }
                     }
-                .padding(5)
+                    .padding(5)
             }
-                .padding()
-                .foregroundColor(Color.orange)
+            .padding()
+            .foregroundColor(Color.orange)
             Button(action: {
                 withAnimation(Animation.easeInOut) {
                     self.viewModel.resetGame()
@@ -56,9 +56,9 @@ struct CardView: View {
             ZStack {
                 Group {
                     if card.isConsumingBonusTime {
-                        Pie(startAngle: Angle.degrees(-90), endAngle: Angle.degrees(-animatedBonusRemaining*360 - 90), clockwise: true)
-                            .onAppear {
-                                self.startBonusTimeAnimation()
+                        VStack {
+                            Pie(startAngle: Angle.degrees(-90), endAngle: Angle.degrees(-animatedBonusRemaining*360 - 90), clockwise: true)
+                            .onAppear { self.startBonusTimeAnimation() }
                         }
                     } else {
                         Pie(startAngle: Angle.degrees(-90), endAngle: Angle.degrees(-card.bonusRemaining*360 - 90), clockwise: true)

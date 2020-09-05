@@ -42,6 +42,8 @@ struct Cardify: AnimatableModifier {
     private let edgeLineWidth: CGFloat = 3
 }
 
+// MARK: - Cardify Extension
+
 extension View {
     func cardify(isFaceUp: Bool) -> some View {
         self.modifier(Cardify(isFaceUp: isFaceUp))

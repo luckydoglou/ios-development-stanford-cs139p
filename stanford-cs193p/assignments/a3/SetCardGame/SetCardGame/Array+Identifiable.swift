@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+extension Array where Element: Identifiable{
+    func firstIndex(matching: Element) -> Int? {
+        for index in self.indices {
+            if self[index].id == matching.id {
+                return index
+            }
+        }
+        return nil
+    }
+}

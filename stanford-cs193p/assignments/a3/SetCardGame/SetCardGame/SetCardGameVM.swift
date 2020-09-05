@@ -12,34 +12,36 @@ class SetCardGameVM {
     
     var model: SetCardGame<CardContent> = SetCardGameVM.createSetCardGame()
     
-    
-    
     // create Set card game
     static func createSetCardGame() -> SetCardGame<CardContent> {
-        
-        return SetCardGame()
-        
+        var cardContentArray = Array<CardContent>()
+        for number in CardContent.Number.allCases {
+            for colour in CardContent.Colour.allCases {
+                for shape in CardContent.Shapes.allCases {
+                    for shading in CardContent.Shading.allCases {
+                        cardContentArray.append(CardContent(numberOfShapes: number, colour: colour, shape: shape, shading: shading))
+                    }
+                }
+            }
+        }
+    
+        return SetCardGame<CardContent>(numberOfCards: 12) { index in
+            return cardContentArray[index]
+            
+        }
     }
     
+    // MARK: - Access to the Model
+    
+    var cards: Array<SetCardGame<CardContent>.Card> {
+        model.cards
+    }
+    
+    // MARK: - Intent(s)
+    
+    func choose(card: SetCardGame<CardContent>.Card) {
+        model.choose(card: card)
+    }
 }
 
-struct CardContent {
-    
-    // enums for shape, shading
-    var numberOfShapes: Int
-    var colors: Color
-    var shape: Shape
-    var shading: Shading
-    
-    enum Shape {
-        case rectangle
-        case oval
-        case diamond
-    }
-    enum Shading {
-        case solid
-        case semitransparent
-        case clear
-    }
-    
-}
+
