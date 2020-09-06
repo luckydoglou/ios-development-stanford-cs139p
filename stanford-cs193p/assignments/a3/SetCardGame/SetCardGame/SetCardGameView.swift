@@ -9,24 +9,23 @@
 import SwiftUI
 
 struct SetCardGameView: View {
-    
-    var viewModel: SetCardGameVM
+    @ObservedObject var viewModel: SetCardGameVM
     
     var body: some View {
         VStack {
-            Grid(viewModel.cards) { card in
-                CardView(card: card)
+            Grid(viewModel.presentCards) { card in
+                CardView(card: card).onTapGesture {
+                    self.viewModel.choose(card: card)
+                }
             }
             .padding(5)
         }
-        
     }
     
 }
 
 struct CardView: View {
-    
-    var card: SetCardGame<CardContent>.Card
+    var card: SetCardGame.Card
     
     var body: some View {
         GeometryReader { geometry in
@@ -40,7 +39,6 @@ struct CardView: View {
     }
     
 }
-
 
 
 

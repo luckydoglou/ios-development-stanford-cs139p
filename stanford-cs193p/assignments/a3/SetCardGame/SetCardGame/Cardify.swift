@@ -14,7 +14,7 @@ struct Cardify: AnimatableModifier {
         ZStack {
             RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
             RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3.0)
-            content.aspectRatio(0.75, contentMode: .fit)
+            content.aspectRatio(0.7, contentMode: .fit)
         }
         .padding(5)
     }

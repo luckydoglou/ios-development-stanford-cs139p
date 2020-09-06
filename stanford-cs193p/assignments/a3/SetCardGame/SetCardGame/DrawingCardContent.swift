@@ -20,9 +20,9 @@ struct DrawingCardContent: View {
             
             ForEach(0..<content.numberOfShapes.rawValue, id: \.self) { _ in
                 self.shape
-                    .foregroundColor(self.color)
                     .shading(type: self.content.shading)
                     .overlay(self.shape.stroke(lineWidth: 3))
+                    .foregroundColor(self.color)
                     .aspectRatio(1, contentMode: .fit)
             }
         }
@@ -100,7 +100,7 @@ struct ShadingModifier: ViewModifier {
             if type == .solid {
                 content
             } else if type == .stripped {
-                StripePattern(stripeWidth: 3, interval: 2).mask(content)
+                StripePattern(stripeWidth: 2, interval: 2).mask(content)
             } else {
                 content.opacity(0)
             }
