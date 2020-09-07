@@ -9,4 +9,6 @@ lecture 5-6: ViewBuilder; ViewModifier; Shape; Animation </br>
 
 ## Set card game
 
+Midterm project, my first iOS app! </br>
+
 ![Set Card Game Demo](SetCardGame/ScreenShots/SetCardGameDemo.gif)
