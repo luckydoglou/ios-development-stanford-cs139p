@@ -10,10 +10,10 @@ import SwiftUI
 
 class SetCardGameVM: ObservableObject {
     
-    @Published var model: SetCardGame = SetCardGameVM.createSetCardGame()
+    @Published private var model: SetCardGame = SetCardGameVM.createSetCardGame()
     
     // create Set card game
-    static func createSetCardGame() -> SetCardGame {
+    private static func createSetCardGame() -> SetCardGame {
         var cardContentArray = Array<CardContent>()
         for number in CardContent.Number.allCases {
             for colour in CardContent.Colour.allCases {
@@ -27,7 +27,6 @@ class SetCardGameVM: ObservableObject {
     
         return SetCardGame(numberOfCards: 81) { index in
             return cardContentArray[index]
-            
         }
     }
     
@@ -37,11 +36,22 @@ class SetCardGameVM: ObservableObject {
         model.cardsShowing
     }
     
+    var score: Int {
+        model.score
+    }
+    
     // MARK: - Intent(s)
     
     func choose(card: SetCardGame.Card) {
         model.choose(card: card)
     }
+    
+    func dealCards(quantity: Int = 3) {
+        model.dealCards(quantity)
+    }
+    
+    func resetGame() {
+        model = SetCardGameVM.createSetCardGame()
+    }
 }
-
 

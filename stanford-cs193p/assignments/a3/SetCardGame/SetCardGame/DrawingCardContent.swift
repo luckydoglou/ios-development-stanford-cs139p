@@ -12,25 +12,25 @@ struct DrawingCardContent: View {
     var content: CardContent
     
     var body: some View {
-        VStack {
-//            Text("\(content.numberOfShapes.rawValue)")
-//            Text(content.colour.rawValue)
-//            Text(content.shape.rawValue)
-//            Text(content.shading.rawValue)
-            
-            ForEach(0..<content.numberOfShapes.rawValue, id: \.self) { _ in
-                self.shape
-                    .shading(type: self.content.shading)
-                    .overlay(self.shape.stroke(lineWidth: 3))
-                    .foregroundColor(self.color)
-                    .aspectRatio(1, contentMode: .fit)
+        GeometryReader { geometry in
+            VStack {
+                ForEach(0..<self.content.numberOfShapes.rawValue, id: \.self) { _ in
+                    self.shape
+                        .shading(type: self.content.shading)
+                        .overlay(self.shape.stroke(lineWidth: self.edgeLineWidth))
+                        .foregroundColor(self.color)
+                        .aspectRatio(1, contentMode: .fit)
+                }
             }
         }
+        .padding()
     }
+    
+    let edgeLineWidth: CGFloat = 3.0
 
     // MARK: - Convert CardContent.Colour to SwiftUI.Color
     
-    var color: Color {
+    private var color: Color {
         switch content.colour {
         case .blue:
             return Color.blue
@@ -43,11 +43,11 @@ struct DrawingCardContent: View {
 
     // MARK: - Convert CardContent.Shapes to ShapeView
     
-    var shape: ShapeView {
+    private var shape: ShapeView {
         return ShapeView(shape: content.shape)
     }
     
-    struct ShapeView: Shape {
+    private struct ShapeView: Shape {
         var shape: CardContent.Shapes
         
         func path(in rect: CGRect) -> Path {
@@ -63,7 +63,7 @@ struct DrawingCardContent: View {
         }
     }
 
-    struct Diamond: Shape {
+    private struct Diamond: Shape {
         func path(in rect: CGRect) -> Path {
             var p = Path()
             p.move(to: CGPoint(x: rect.midX, y: rect.minY))
@@ -76,7 +76,7 @@ struct DrawingCardContent: View {
         }
     }
 
-    struct Triangle: Shape {
+    private struct Triangle: Shape {
         func path(in rect: CGRect) -> Path {
             var p = Path()
             p.move(to: CGPoint(x: rect.midX, y: rect.minY))
@@ -92,7 +92,7 @@ struct DrawingCardContent: View {
 
 // MARK: - Shading Modifier
 
-struct ShadingModifier: ViewModifier {
+private struct ShadingModifier: ViewModifier {
     var type: CardContent.Shading
 
     func body(content: Content) -> some View {
@@ -117,7 +117,7 @@ extension View {
 
 // MARK: - Stripe Pattern
 
-struct StripePattern: Shape {
+private struct StripePattern: Shape {
     var stripeWidth: Int
     var interval: Int
     
@@ -131,7 +131,6 @@ struct StripePattern: Shape {
                 p.addRect(CGRect(x: CGFloat(index * stripeWidth), y: 0, width: CGFloat(stripeWidth), height: rect.height))
             }
         }
-        
         return p
     }
 }

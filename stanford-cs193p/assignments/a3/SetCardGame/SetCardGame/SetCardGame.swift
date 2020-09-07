@@ -9,31 +9,27 @@
 import Foundation
 
 struct SetCardGame {
-    var cards: Array<Card>
+    private(set) var cards: Array<Card>
     var cardsShowing: Array<Card> {
         get {cards.filter { $0.isShowing }}
     }
-    var selectedCards: Array<Card> {
+    private var selectedCards: Array<Card> {
         get { cardsShowing.filter { $0.isSelected }}
     }
+    private(set) var score: Int = 0
     
     init(numberOfCards: Int, cardContentFactory: (Int) -> CardContent) {
         cards = Array<Card>()
-//        cardsShowing = Array<Card>()
         for index in 0..<numberOfCards {
             let content = cardContentFactory(index)
             cards.append(Card(id: index, content: content))
         }
-        cards.shuffle()
-        for index in 0..<12 {
-            cards[index].isShowing = true
-//            cardsShowing.append(cards[index])
-//            cards.remove(at: index)
-        }
+//        cards.shuffle()
     }
     
+    // MARK: - Methods
+    
     mutating func choose(card: Card) {
-        
         for index in cards.indices {
             if cards[index].id == card.id {
                 cards[index].isSelected.toggle()
@@ -48,14 +44,16 @@ struct SetCardGame {
     
     mutating func checkMatching() {
         if isSet(card1: selectedCards[0], card2: selectedCards[1], card3: selectedCards[2]) {
+            score += 3
             discardSelectedCards()
         } else {
+            score -= 3
             deselectAllCards()
         }
     }
     
     // checkMatching() helper function 1
-    func isSet(card1: Card, card2: Card, card3: Card) -> Bool {
+    private func isSet(card1: Card, card2: Card, card3: Card) -> Bool {
         return isFeatureASet(contentA: card1.content.numberOfShapes,
                              contentB: card2.content.numberOfShapes,
                              contentC: card3.content.numberOfShapes) &&
@@ -71,19 +69,12 @@ struct SetCardGame {
     }
     
     // checkMatching() helper function 2
-    func isFeatureASet<Content: Equatable>(contentA: Content, contentB: Content, contentC: Content) -> Bool {
+    private func isFeatureASet<Content: Equatable>(contentA: Content, contentB: Content, contentC: Content) -> Bool {
         return (contentA == contentB && contentB == contentC) ||
             (contentA != contentB && contentB != contentC && contentC != contentA)
     }
     
-    mutating func discardSelectedCards() {
-//        for i in cardsShowing.indices {
-//            for j in selectedCards.indices {
-//                if cardsShowing[i].id == selectedCards[j].id {
-//                    cardsShowing.remove(at: i)
-//                }
-//            }
-//        }
+    private mutating func discardSelectedCards() {
         for index in cards.indices {
             if cards[index].isSelected {
                 cards[index].isShowing = false
@@ -94,19 +85,13 @@ struct SetCardGame {
         dealCards()
     }
     
-    mutating func deselectAllCards() {
+    private mutating func deselectAllCards() {
         for index in cards.indices {
             cards[index].isSelected = false
         }
     }
     
     mutating func dealCards(_ quantity: Int = 3) {
-//        for index in 0..<quantity {
-//            if cards.count > 0 {
-//                cardsShowing.append(cards[index])
-//                cards.remove(at: index)
-//            }
-//        }
         var count = 0
         for index in cards.indices {
             if (count < quantity) && (!cards[index].isMatched) && (!cards[index].isShowing) {
@@ -115,6 +100,8 @@ struct SetCardGame {
             }
         }
     }
+    
+    // MARK: - Card Structure
     
     struct Card: Identifiable {
         var id: Int
