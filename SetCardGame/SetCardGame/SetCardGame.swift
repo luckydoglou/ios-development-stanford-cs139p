@@ -24,7 +24,7 @@ struct SetCardGame {
             let content = cardContentFactory(index)
             cards.append(Card(id: index, content: content))
         }
-//        cards.shuffle()
+        cards.shuffle()
     }
     
     // MARK: - Methods

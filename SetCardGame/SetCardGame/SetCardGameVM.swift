@@ -52,6 +52,7 @@ class SetCardGameVM: ObservableObject {
     
     func resetGame() {
         model = SetCardGameVM.createSetCardGame()
+        dealCards(quantity: 12)
     }
 }
 
