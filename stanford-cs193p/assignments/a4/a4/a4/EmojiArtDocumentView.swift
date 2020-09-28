@@ -39,6 +39,7 @@ struct EmojiArtDocumentView: View {
                     
                 }
                 .clipped()
+                .gesture(zoomGesture())
                 .edgesIgnoringSafeArea([.horizontal, .bottom])
                 .onDrop(of: ["public.image", "public.text"], isTargeted: nil) { providers, location in
                     // SwiftUI bug (as of 13.4)? the location is supposed to be in our coordinate system
@@ -53,8 +54,16 @@ struct EmojiArtDocumentView: View {
         }
     }
     
-    @State private var zoomScale: CGFloat = 1.0
+    @State private var steadyStateZoomScale: CGFloat = 1.0
+    @GestureState private var gestureZoomScale: CGFloat = 1.0
+    private var zoomScale: CGFloat {
+        steadyStateZoomScale * gestureZoomScale
+    }
     private let defaultEmojiSize: CGFloat = 40.0
+    
+    private func zoomGesture() -> some Gesture {
+        MagnificationGesture()
+    }
     
     private func doubleTapToZoom(in size: CGSize) -> some Gesture {
         TapGesture(count: 2)
@@ -69,14 +78,14 @@ struct EmojiArtDocumentView: View {
         if let image = image, image.size.width > 0, image.size.height > 0 {
             let hZoom = size.width / image.size.width
             let vZoom = size.height / image.size.height
-            self.zoomScale = min(hZoom, vZoom)
+            self.steadyStateZoomScale = min(hZoom, vZoom)
         }
     }
     
     private func position(for emoji: EmojiArt.Emoji, in size: CGSize) -> CGPoint {
         var location = emoji.location
         location = CGPoint(x: location.x * zoomScale, y: location.y * zoomScale)
-        location = CGPoint(x: emoji.location.x + size.width/2, y: emoji.location.y + size.height/2)
+        location = CGPoint(x: location.x + size.width/2, y: location.y + size.height/2)
         return location
     }
     

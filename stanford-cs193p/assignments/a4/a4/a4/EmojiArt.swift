@@ -15,7 +15,7 @@ struct EmojiArt: Codable {
     
     struct Emoji: Identifiable, Codable {
         let text: String
-        var x: Int // offset from the center
+        var x: Int // offset from the center, iOS cordinate system use upper left as (0,0)
         var y: Int // offset from the center
         var size: Int
         let id: Int
