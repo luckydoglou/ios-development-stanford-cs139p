@@ -13,7 +13,7 @@ struct EmojiArt: Codable {
     var backgroundURL: URL?
     var emojis = [Emoji]()
     
-    struct Emoji: Identifiable, Codable {
+    struct Emoji: Identifiable, Codable, Hashable {
         let text: String
         var x: Int // offset from the center, iOS cordinate system use upper left as (0,0)
         var y: Int // offset from the center
