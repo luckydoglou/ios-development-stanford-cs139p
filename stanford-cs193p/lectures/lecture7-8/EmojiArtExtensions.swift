@@ -20,6 +20,19 @@ extension Collection where Element: Identifiable {
     }
 }
 
+// select and deselect emoji, for emoji related manipulation
+extension Set where Element: Identifiable {
+    mutating func selectDeselectEmoji(_ element: Element) {
+        // after zooming, the element has changed, we need to re-located it
+        let ele = first(where: { $0.id == element.id })
+        if ele != nil {
+            remove(ele!)
+        } else {
+            insert(element)
+        }
+    }
+}
+
 extension Data {
     // just a simple converter from a Data to a String
     var utf8: String? { String(data: self, encoding: .utf8 ) }

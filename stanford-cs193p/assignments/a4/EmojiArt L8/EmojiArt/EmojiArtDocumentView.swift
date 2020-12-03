@@ -35,6 +35,10 @@ struct EmojiArtDocumentView: View {
                         Text(emoji.text)
                             .font(animatableWithSize: emoji.fontSize * self.zoomScale)
                             .position(self.position(for: emoji, in: geometry.size))
+                            .onTapGesture {
+                                print(emoji.text)
+                            }
+//                            .gesture(self.selectGesture(text: emoji.text))
                     }
                 }
                 .clipped()
@@ -52,6 +56,13 @@ struct EmojiArtDocumentView: View {
                 }
             }
         }
+    }
+    
+    private func selectGesture(text: String) -> some Gesture {
+        TapGesture(count: 1)
+            .onEnded {
+                print(text)
+            }
     }
     
     @State private var steadyStateZoomScale: CGFloat = 1.0

@@ -11,6 +11,7 @@ import SwiftUI
 struct EmojiArtDocumentView: View {
     
     @ObservedObject var document: EmojiArtDocument = EmojiArtDocument()
+    @State private var selectedEmojis: Set<EmojiArt.Emoji> = []
     
     var body: some View {
         VStack {
@@ -35,7 +36,14 @@ struct EmojiArtDocumentView: View {
                     ForEach(self.document.emojis) { emoji in
                         Text(emoji.text)
                             .font(animatableWithSize: emoji.fontSize * self.zoomScale)
+                            .background(
+                                Rectangle()
+                                    .stroke(Color.black)
+                                    .opacity(selectedEmojis.contains(matching: emoji) ? 1 : 0)
+                            )
                             .position(self.position(for: emoji, in: geometry.size))
+                            // select emojis gesture
+                            .gesture(emojiSelectDeselectTapGesture(emoji))
                     }
                     
                 }
@@ -57,20 +65,46 @@ struct EmojiArtDocumentView: View {
         }
     }
     
+    // MARK: - Select emojis
+    
+    private func emojiSelectDeselectTapGesture(_ emoji: EmojiArt.Emoji) -> some Gesture {
+        TapGesture(count: 1)
+            .onEnded {
+                selectedEmojis.selectDeselectEmoji(emoji)
+        }
+    }
+    
+    // MARK: - Zoom and move entire view
+    
     @State private var steadyStateZoomScale: CGFloat = 1.0
     @GestureState private var gestureZoomScale: CGFloat = 1.0
     private var zoomScale: CGFloat {
-        steadyStateZoomScale * gestureZoomScale
+        steadyStateZoomScale * (selectedEmojis.isEmpty ? gestureZoomScale : 1.0)
     }
     private let defaultEmojiSize: CGFloat = 40.0
     
     private func zoomGesture() -> some Gesture {
         MagnificationGesture()
             .updating($gestureZoomScale) { latestGestureScale, gestureZoomScale, transaction in
-                gestureZoomScale = latestGestureScale
+                // check if emojis are selected, and zooming emojis dynamically
+                if selectedEmojis.isEmpty {
+                    gestureZoomScale = latestGestureScale
+                } else {
+                    selectedEmojis.forEach { emoji in
+                        self.document.scaleEmoji(emoji, by: latestGestureScale)
+                    }
+                }
+                
             }
             .onEnded { finalGestureScale in
-                self.steadyStateZoomScale *= finalGestureScale
+                // check if emojis are selected, and only zooming them
+                if selectedEmojis.isEmpty {
+                    self.steadyStateZoomScale *= finalGestureScale
+                } else {
+                    selectedEmojis.forEach { emoji in
+                        self.document.scaleEmoji(emoji, by: finalGestureScale)
+                    }
+                }
             }
     }
     
@@ -78,16 +112,29 @@ struct EmojiArtDocumentView: View {
     @GestureState private var gesturePanOffset: CGSize = .zero
     
     private var panOffset: CGSize {
-        (steadyStatePanOffset + gesturePanOffset) * zoomScale
+        (steadyStatePanOffset + (selectedEmojis.isEmpty ? gesturePanOffset : .zero)) * zoomScale
     }
     
     private func panGesture() -> some Gesture {
         DragGesture()
             .updating($gesturePanOffset) { latestDragGestureValue, gesturePanOffset, trransaction in
-                gesturePanOffset = latestDragGestureValue.translation / self.zoomScale
+                if selectedEmojis.isEmpty {
+                    gesturePanOffset = latestDragGestureValue.translation / self.zoomScale
+                } else {
+                    selectedEmojis.forEach { emoji in
+                        self.document.moveEmoji(emoji, by: latestDragGestureValue.translation)
+                    }
+                }
             }
             .onEnded { finalDragGestureValue in
-                self.steadyStatePanOffset = self.steadyStatePanOffset + (finalDragGestureValue.translation / self.zoomScale)
+                // check if emojis are selected, and only panning them
+                if selectedEmojis.isEmpty {
+                    self.steadyStatePanOffset = self.steadyStatePanOffset + (finalDragGestureValue.translation / self.zoomScale)
+                } else {
+                    selectedEmojis.forEach { emoji in
+                        self.document.moveEmoji(emoji, by: finalDragGestureValue.translation)
+                    }
+                }
             }
     }
     
