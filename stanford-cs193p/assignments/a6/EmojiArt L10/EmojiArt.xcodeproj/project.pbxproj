@@ -83,24 +83,24 @@
 			isa = PBXGroup;
 			children = (
 				EC23E1322460DEE600779A21 /* PaletteChooser.swift */,
-				EC48CF4C2463867900F59507 /* EmojiArtDocumentStore.swift */,
 				EC48CF4E2463893D00F59507 /* EmojiArtDocumentChooser.swift */,
-				EC6BD6E624579CE000DC5EE0 /* EmojiArtDocument.swift */,
-				EC48CF50246392D100F59507 /* EditableText.swift */,
+				EC48CF4C2463867900F59507 /* EmojiArtDocumentStore.swift */,
 				EC6BD6D624579CB100DC5EE0 /* EmojiArtDocumentView.swift */,
+				EC6BD6E624579CE000DC5EE0 /* EmojiArtDocument.swift */,
 				EC0F58392460E2E800AF58B2 /* EmojiArtDocument+Palette.swift */,
 				EC6BD6E82457A09400DC5EE0 /* EmojiArt.swift */,
+				EC48CF50246392D100F59507 /* EditableText.swift */,
 				EC23E1302460D7C200779A21 /* Spinning.swift */,
 				EC6BD6F2245A48D100DC5EE0 /* OptionalImage.swift */,
 				EC6BD6F4245A48D100DC5EE0 /* AnimatableSystemFontModifier.swift */,
 				EC6BD6EC245963C900DC5EE0 /* EmojiArtExtensions.swift */,
-				EC6BD6D824579CB100DC5EE0 /* Assets.xcassets */,
 				EC48CF48246381A300F59507 /* Grid.swift */,
 				EC48CF49246381A300F59507 /* GridLayout.swift */,
 				EC6BD6D224579CB100DC5EE0 /* AppDelegate.swift */,
 				EC6BD6D424579CB100DC5EE0 /* SceneDelegate.swift */,
 				EC6BD6DD24579CB100DC5EE0 /* LaunchScreen.storyboard */,
 				EC6BD6E024579CB100DC5EE0 /* Info.plist */,
+				EC6BD6D824579CB100DC5EE0 /* Assets.xcassets */,
 				EC6BD6DA24579CB100DC5EE0 /* Preview Content */,
 			);
 			path = EmojiArt;
@@ -141,7 +141,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "CS193p Instructor";
 				TargetAttributes = {
 					EC6BD6CE24579CB100DC5EE0 = {
@@ -244,6 +244,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -304,6 +305,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
