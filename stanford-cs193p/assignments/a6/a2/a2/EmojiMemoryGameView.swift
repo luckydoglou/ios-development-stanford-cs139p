@@ -19,13 +19,13 @@ struct EmojiMemoryGameView: View {
                 .padding()
             HStack {
                 Spacer()
-                Text("\(document.themeName) Theme")
+                Text("\(document.theme.name) Theme")
                 Spacer()
                 Text("Points: \(document.points)")
                 Spacer()
             }
             Grid(document.cards) { card in
-                CardView(card: card, themeColor: self.document.themeColor).onTapGesture {
+                CardView(card: card, themeColor: self.document.theme.color).onTapGesture {
                     self.document.choose(card: card)
                 }
                     .padding(5)

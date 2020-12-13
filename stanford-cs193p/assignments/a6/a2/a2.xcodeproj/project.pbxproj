@@ -22,6 +22,8 @@
 		8E94AC0B24DC53EC003AFD49 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E94AC0A24DC53EC003AFD49 /* Theme.swift */; };
 		8ECEC3D3257DAF430058D4B8 /* EmojiMemoryGameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECEC3D2257DAF430058D4B8 /* EmojiMemoryGameStore.swift */; };
 		8ECEC3D6257DAFD60058D4B8 /* EmojiMemoryGameChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECEC3D5257DAFD60058D4B8 /* EmojiMemoryGameChooser.swift */; };
+		8ECEC3DA258034DC0058D4B8 /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECEC3D9258034DC0058D4B8 /* EditableText.swift */; };
+		8ECEC3DD258152320058D4B8 /* EmojiMemoryGame+ThemeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECEC3DC258152320058D4B8 /* EmojiMemoryGame+ThemeEditor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		8E94AC0A24DC53EC003AFD49 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		8ECEC3D2257DAF430058D4B8 /* EmojiMemoryGameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGameStore.swift; sourceTree = "<group>"; };
 		8ECEC3D5257DAFD60058D4B8 /* EmojiMemoryGameChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGameChooser.swift; sourceTree = "<group>"; };
+		8ECEC3D9258034DC0058D4B8 /* EditableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditableText.swift; path = ../../EditableText.swift; sourceTree = "<group>"; };
+		8ECEC3DC258152320058D4B8 /* EmojiMemoryGame+ThemeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmojiMemoryGame+ThemeEditor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,12 +80,14 @@
 			children = (
 				8E94ABE824DB199E003AFD49 /* AppDelegate.swift */,
 				8E94ABEA24DB199E003AFD49 /* SceneDelegate.swift */,
+				8ECEC3DC258152320058D4B8 /* EmojiMemoryGame+ThemeEditor.swift */,
 				8ECEC3D5257DAFD60058D4B8 /* EmojiMemoryGameChooser.swift */,
 				8ECEC3D2257DAF430058D4B8 /* EmojiMemoryGameStore.swift */,
 				8E94ABEC24DB199E003AFD49 /* EmojiMemoryGameView.swift */,
 				8E94ABFE24DB2FEC003AFD49 /* EmojiMemoryGame.swift */,
 				8E94ABFC24DB2E1D003AFD49 /* MemoryGame.swift */,
 				8E94AC0A24DC53EC003AFD49 /* Theme.swift */,
+				8ECEC3D9258034DC0058D4B8 /* EditableText.swift */,
 				8E94AC0224DB6E2C003AFD49 /* Grid.swift */,
 				8E94AC0424DB75E6003AFD49 /* GridLayout.swift */,
 				8E94AC0824DB8C5E003AFD49 /* Array+Only.swift */,
@@ -178,7 +184,9 @@
 				8E94ABEB24DB199E003AFD49 /* SceneDelegate.swift in Sources */,
 				8E94ABFD24DB2E1D003AFD49 /* MemoryGame.swift in Sources */,
 				8E94AC0B24DC53EC003AFD49 /* Theme.swift in Sources */,
+				8ECEC3DA258034DC0058D4B8 /* EditableText.swift in Sources */,
 				8E94AC0924DB8C5E003AFD49 /* Array+Only.swift in Sources */,
+				8ECEC3DD258152320058D4B8 /* EmojiMemoryGame+ThemeEditor.swift in Sources */,
 				8E94ABED24DB199E003AFD49 /* EmojiMemoryGameView.swift in Sources */,
 				8E94ABFF24DB2FEC003AFD49 /* EmojiMemoryGame.swift in Sources */,
 				8E94AC0724DB789E003AFD49 /* Array+Identifiable.swift in Sources */,

@@ -12,6 +12,10 @@ class EmojiMemoryGame: ObservableObject, Identifiable {
     
     @Published private var memoryGame: MemoryGame<String>
     
+    static func == (lhs: EmojiMemoryGame, rhs: EmojiMemoryGame) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     let id: UUID
     static var fruits: Array<String> = ["🍇", "🍉", "🍌", "🍓"]
 //    stavar themeName: String = "Untitled"
@@ -35,12 +39,16 @@ class EmojiMemoryGame: ObservableObject, Identifiable {
         memoryGame.gamePoints
     }
     
-    var themeName: String {
-        memoryGame.theme.name
-    }
+//    var themeName: String {
+//        memoryGame.theme.name
+//    }
+//
+//    var themeColor: Color {
+//        memoryGame.theme.themeColor
+//    }
     
-    var themeColor: Color {
-        memoryGame.theme.themeColor
+    var theme: MemoryGame<String>.Theme {
+        memoryGame.theme
     }
     
     
@@ -53,6 +61,20 @@ class EmojiMemoryGame: ObservableObject, Identifiable {
         // TODO
         //memoryGame = EmojiMemoryGame.createMemoryGame()
     }
+
+    
+    // MARK: - Theme related operations
+    func setThemeName(_ name: String) {
+        memoryGame.setThemeName(name)
+    }
+    
+    func addEmoji(_ emoji: String) {
+        memoryGame.addThemeContent(content: emoji)
+    }
+    
+    func removeEmoji(_ emoji: String) {
+        memoryGame.removeThemeContent(content: emoji)
+    }
     
 }
 
@@ -60,11 +82,11 @@ class EmojiMemoryGame: ObservableObject, Identifiable {
 // MARK: - Extensions
 extension MemoryGame.Theme {
     // convert Theme.color to Color type
-    var themeColor: Color {
-        Color(UIColor.RGBA(red: CGFloat(color.red),
-                           green: CGFloat(color.green),
-                           blue: CGFloat(color.blue),
-                           alpha: CGFloat(color.alpha)))
+    var color: Color {
+        Color(UIColor.RGBA(red: CGFloat(rawColor.red),
+                           green: CGFloat(rawColor.green),
+                           blue: CGFloat(rawColor.blue),
+                           alpha: CGFloat(rawColor.alpha)))
     }
 }
 

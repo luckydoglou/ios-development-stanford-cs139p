@@ -74,6 +74,21 @@ struct MemoryGame<CardType>: Codable where CardType: Equatable, CardType: Codabl
         }
     }
     
+    mutating func setThemeName(_ name: String) {
+        self.theme.name = name
+    }
+    
+    mutating func addThemeContent(content: CardType) {
+        self.theme.content.append(content)
+    }
+    
+    mutating func removeThemeContent(content: CardType) {
+        if let index = self.theme.content.firstIndex(of: content) {
+            self.theme.content.remove(at: index)
+        }
+    }
+    
+    
     struct Card: Identifiable, Codable {
         var id: Int
         var content: CardType
@@ -86,7 +101,7 @@ struct MemoryGame<CardType>: Codable where CardType: Equatable, CardType: Codabl
     struct Theme: Identifiable, Codable {
         var id: Int
         var name: String
-        var color: RGBA
+        var rawColor: RGBA
         var content: Array<CardType>
         
         
@@ -94,7 +109,7 @@ struct MemoryGame<CardType>: Codable where CardType: Equatable, CardType: Codabl
             self.id = id
             self.name = name
             self.content = content
-            self.color = RGBA(red: 255, green: 0, blue: 0, alpha: 1)
+            self.rawColor = RGBA(red: 255, green: 0, blue: 0, alpha: 1)
         }
         
         struct RGBA: Codable {
